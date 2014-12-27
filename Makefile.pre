@@ -1,0 +1,93 @@
+
+
+
+:setvar:optoprocess:qry:chorebox-rcp-find opto-process.pre
+:prcd:var:optoprocess::l:optoworld::x:
+
+
+
+:setvar:sc-config:qry:chorebox-rcp-find sc-config.pre
+:bna:extra-recipes
+:wrlry:targetworld:recipes:extra-recipes:
+
+
+
+
+
+
+
+# Establish the C header files associated just with the transpiler.
+:bna:c-core-h
+:bna:x:chbc2c
+:redun:x:c-core-h
+
+# Establish the C header files associated with the CHBC language.
+:bna:c-chbc-core-h
+:bna:x:hcbclib
+:redun:x:c-chbc-core-h
+
+
+::# Establish which source files have their core form in C.
+:bna:c-core-src
+:bna:x:main
+:redun:x:c-core-src
+
+
+::# Of course, we do also need a list of all C files,
+::# regardless of whether C is their original form or
+::# they are intermediates from CHBC.
+:bna:c-src
+:redun:c-core-src:c-src
+
+
+:-:
+:-:all: Makefile
+:foreach:c-src:sorco:
+  :*: ofiles/
+  :echo:var:sorco:
+  :*:.o
+:eachend:
+
+:-:
+:-:clean:
+:->:rm -rf ofiles
+
+
+:-:
+:-:install: all
+
+::# The Core C files are compiled from the same source
+::# regardless of whether the development flag to develop
+::# CHBC files from core-source or C-intermediate is on.
+::# This is because these sources have no CHBC form.
+:foreach:c-core-src:sorco:
+  :-:
+  :-:ofiles/
+  :echo:var:sorco:
+  :*:.o: $(srcdir)/
+  :echo:var:sorco:
+  :*:.c
+  :foreach:c-core-h:headfile:
+    :*: $(srcdir)/
+    :echo:var:headfile:
+    :*:.h
+  :eachend:
+  :*: Makefile
+  :->:mkdir -p ofiles
+  :->:
+  :echo:world:optoworld:compile:
+  :*: -I$(srcdir)/libchbclib/inc -I$(includedir) -c -o 'ofiles/
+  :echo:shl:var:sorco:
+  :*:.o' '$(srcdir)/
+  :echo:shl:var:sorco:
+  :*:.c'
+:eachend:
+
+
+
+
+
+
+:prcd:var:sc-config::l:targetworld::x
+
+
