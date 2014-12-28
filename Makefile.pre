@@ -23,7 +23,7 @@
 
 # Establish the C header files associated with the CHBC language.
 :bna:c-chbc-core-h
-:bna:x:hcbclib
+:bna:x:chbclib
 :redun:x:c-chbc-core-h
 
 
@@ -42,6 +42,18 @@
 
 :-:
 :-:all: Makefile
+:*: products/chbc2c
+
+:-:products/chbc2c:
+:foreach:c-src:sorco:
+  :*: ofiles/
+  :echo:var:sorco:
+  :*:.o
+:eachend:
+:->:mkdir -p products
+:->:
+:echo:world:optoworld:compile:
+:*: -o products/chbc2c
 :foreach:c-src:sorco:
   :*: ofiles/
   :echo:var:sorco:
@@ -69,6 +81,11 @@
   :*:.c
   :foreach:c-core-h:headfile:
     :*: $(srcdir)/
+    :echo:var:headfile:
+    :*:.h
+  :eachend:
+  :foreach:c-chbc-core-h:headfile:
+    :*: $(srcdir)/libchbclib/inc/
     :echo:var:headfile:
     :*:.h
   :eachend:
