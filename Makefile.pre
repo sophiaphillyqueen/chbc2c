@@ -3,6 +3,14 @@
 
 :setvar:optoprocess:qry:chorebox-rcp-find opto-process.pre
 :prcd:var:optoprocess::l:optoworld::x:
+:wrlcpy:l:optoworld::l:libraworld::x:
+:prcd:qry:chorebox-rcp-find libworld-setup.pre::l:libraworld::x
+
+:wrlvr:libraworld:libname:l:chbclib
+:wrlvr:libraworld:prodloc:l:products/lchbclib
+:wrlvr:libraworld:tmploc:l:tmp/lchbclib
+:wrlvr:libraworld:srcloc:l:libchbclib
+:prcd:qry:chorebox-rcp-find libworld-addlib.pre::l:libraworld::x
 
 
 
@@ -21,10 +29,6 @@
 :bna:x:chbc2c
 :redun:x:c-core-h
 
-# Establish the C header files associated with the CHBC language.
-:bna:c-chbc-core-h
-:bna:x:chbclib
-:redun:x:c-chbc-core-h
 
 
 ::# Establish which source files have their core form in C.
@@ -84,27 +88,24 @@
     :echo:var:headfile:
     :*:.h
   :eachend:
-  :foreach:c-chbc-core-h:headfile:
-    :*: $(srcdir)/libchbclib/inc/
-    :echo:var:headfile:
-    :*:.h
-  :eachend:
   :*: Makefile
   :->:mkdir -p ofiles
   :->:
   :echo:world:optoworld:compile:
-  :*: -I$(srcdir)/libchbclib/inc -I$(includedir) -c -o 'ofiles/
+  :echo:world:libraworld:c-libiopts:
+  :*: -I$(includedir) -c -o 'ofiles/
   :echo:shl:var:sorco:
   :*:.o' '$(srcdir)/
   :echo:shl:var:sorco:
   :*:.c'
 :eachend:
 
-
-
-
+:apnvar:compile:l:
+::donoviro:
 
 
 :prcd:var:sc-config::l:targetworld::x
+
+:echo:world:libraworld:fulltargets:
 
 
