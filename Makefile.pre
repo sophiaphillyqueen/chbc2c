@@ -57,12 +57,14 @@
 :->:mkdir -p products
 :->:
 :echo:world:optoworld:compile:
+:*: -L$(libdir)
 :*: -o products/chbc2c
 :foreach:c-src:sorco:
   :*: ofiles/
   :echo:var:sorco:
   :*:.o
 :eachend:
+:*: -lchorebox
 
 :-:
 :-:clean:
