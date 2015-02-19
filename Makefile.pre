@@ -3,7 +3,7 @@
 
 :setvar:optoprocess:qry:chorebox-rcp-find opto-process.pre
 :prcd:var:optoprocess::l:optoworld::x:
-:wrlcpy:l:optoworld::l:libraworld::x:
+:::wrlcpy:l:optoworld::l:libraworld::x:
 :prcd:qry:chorebox-rcp-find libworld-setup.pre::l:libraworld::x
 
 :wrlvr:libraworld:libname:l:chbclib
@@ -48,12 +48,14 @@
 :-:all: Makefile
 :*: products/chbc2c
 
+:-:
 :-:products/chbc2c:
 :foreach:c-src:sorco:
   :*: ofiles/
   :echo:var:sorco:
   :*:.o
 :eachend:
+:echo:world:libraworld:alllibreqs:
 :->:mkdir -p products
 :->:
 :echo:world:optoworld:compile:
@@ -69,10 +71,12 @@
 :-:
 :-:clean:
 :->:rm -rf ofiles
+:echo:world:libraworld:for-clean:
 
 
 :-:
 :-:install: all
+:echo:world:libraworld:for-install:
 
 ::# The Core C files are compiled from the same source
 ::# regardless of whether the development flag to develop
@@ -90,6 +94,7 @@
     :echo:var:headfile:
     :*:.h
   :eachend:
+  :echo:world:libraworld:headreqs-ca:
   :*: Makefile
   :->:mkdir -p ofiles
   :->:
