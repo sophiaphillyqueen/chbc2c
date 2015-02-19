@@ -47,6 +47,7 @@
 :-:
 :-:all: Makefile
 :*: products/chbc2c
+:echo:world:libraworld:fullreqs:
 
 :-:
 :-:products/chbc2c:
