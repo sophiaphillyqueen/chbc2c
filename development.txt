@@ -1,0 +1,9 @@
+NOTES INTERNAL TO THE DEVELOPMENT OF PROJECT:
+
+Currently, the main C file being worked on is:
+libchbclib/csrc/chbclib_strq_new.c
+
+The function to add a string to the queue has had it's skeleton written -- but nothing else so far.
+
+
+

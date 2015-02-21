@@ -2,7 +2,7 @@
 :emptyarray:c-source:
 :emptyarray:c-heads:
 
-:bna:x:chbclib_flushout
+:bna:x:chbclib_strq_new
 :redun:x:c-source:
 
 :bna:x:chbclib
